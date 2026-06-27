@@ -97,8 +97,30 @@ const ScrollStack = ({
     const scaleEndPositionPx = parsePercentage(scaleEndPosition, containerHeight);
     const endElementTop = endElementOffsetRef.current;
 
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
     cardsRef.current.forEach((card, i) => {
       if (!card) return;
+
+      if (isMobile) {
+        card.style.transform = '';
+        card.style.filter = '';
+        if (i < cardsRef.current.length - 1) {
+          card.style.marginBottom = '24px';
+        } else {
+          card.style.marginBottom = '0px';
+        }
+        card.style.willChange = 'auto';
+        return;
+      } else {
+        card.style.willChange = 'transform, filter';
+        card.style.transformOrigin = 'top center';
+        card.style.backfaceVisibility = 'hidden';
+        card.style.transform = 'translateZ(0)';
+        card.style.webkitTransform = 'translateZ(0)';
+        card.style.perspective = '1000px';
+        card.style.webkitPerspective = '1000px';
+      }
 
       const cardTop = cardOffsetsRef.current[i] || 0;
       const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
@@ -265,17 +287,24 @@ const ScrollStack = ({
       const cards = Array.from(scroller.querySelectorAll('.scroll-stack-card'));
       cardsRef.current = cards;
 
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
       cards.forEach((card, i) => {
         if (i < cards.length - 1) {
-          card.style.marginBottom = `${itemDistance}px`;
+          card.style.marginBottom = isMobile ? '24px' : `${itemDistance}px`;
         }
-        card.style.willChange = 'transform, filter';
-        card.style.transformOrigin = 'top center';
-        card.style.backfaceVisibility = 'hidden';
-        card.style.transform = 'translateZ(0)';
-        card.style.webkitTransform = 'translateZ(0)';
-        card.style.perspective = '1000px';
-        card.style.webkitPerspective = '1000px';
+        if (!isMobile) {
+          card.style.willChange = 'transform, filter';
+          card.style.transformOrigin = 'top center';
+          card.style.backfaceVisibility = 'hidden';
+          card.style.transform = 'translateZ(0)';
+          card.style.webkitTransform = 'translateZ(0)';
+          card.style.perspective = '1000px';
+          card.style.webkitPerspective = '1000px';
+        } else {
+          card.style.willChange = 'auto';
+          card.style.transform = '';
+          card.style.filter = '';
+        }
       });
 
       calculateCardOffsets();
