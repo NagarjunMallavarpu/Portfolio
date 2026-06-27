@@ -1,0 +1,6 @@
+.split-parent.gradient-text .split-char {
+  background: linear-gradient(to right, var(--portfolio-primary, #06a2c2), #a5f3fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
