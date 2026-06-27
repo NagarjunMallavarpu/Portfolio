@@ -4,7 +4,7 @@ Welcome to my personal portfolio codebase! This is a modern, high-performance, a
 
 Built with **React 19**, **Vite**, **Tailwind CSS**, and high-quality interactive libraries, the site features modern UX enhancements like viscous fluid background simulations, smooth scrolling, cards stacking animations, and micro-interactions.
 
-🚀 **Live Link:** [https://your-portfolio.netlify.app/](https://your-portfolio.netlify.app/) *(Update this once deployed)*
+🚀 **Live Link:** [https://nagarjun27.netlify.app/](https://nagarjun27.netlify.app/) (Netlify)
 
 ---
 
